@@ -46,7 +46,7 @@ Un lenguaje lleva asociado un problema de decisión, es decir, ver si esque est�
 - $Sigma$ es un _alfabeto_ (de entrada).
 - $delta: Q times Sigma arrow.r Q$ es una _función de transición_.
 - $s in Q$ es el _estado de partida_.
-- $F subset Q$ son los _estados finales de aceptación_.]
+- $F subset Q$ son los _estados finales de aceptación_.] <AFD>
 
 Un automata finito se puede describir mediante un dibujito pero mi typst no es tan poderoso todavía. Mentira wajaja.
 
@@ -62,3 +62,17 @@ Un automata finito se puede describir mediante un dibujito pero mi typst no es t
 )
 
 Ok se ve horrible. Bueno pero la idea está. Las flechas me indican la función de transición, los nodos son los estados posibles (junto con uno que se subentiende que es el sumidero, a lo que va todo lo que no tenga flecha de salida), las posibles etiquetas de las flechas son el alfabeto. El punto de partida es el que se marca ahí con start, o la flecha que no viene de ningún lado.
+
+#definición([Extensión natural de $delta$])[Podemos extender recursivamente $delta$ de $Q times Sigma$ a $Q times Sigma^*$ con la siguiente regla: $ delta(q, epsilon) = q \ delta(q, omega_1 omega_2 ... omega_n) = delta(delta(q, omega_1), omega_2 omega_3 ... omega_n)  $ ]
+
+#definición("Lenguaje de un AFD")[El conjunto de todas las palabras $omega in Sigma^*$ tal que $delta(s, omega) in F$ es el lenguaje $L_A$ asociado al AFD $A$.]
+
+También puede ser útil extender esta noción a un autómata un poco más general:
+
+#definición("Automata Finito No Determinista")[
+  Una 5 tupla es un automata finito no determinista con todos los elementos salvo $delta$ cumpliendo lo mismo que en un autómata finito determinista (@AFD), y $delta$ ahora cumple que:
+  - $delta: Q times Sigma arrow.r P(Q)$ donde $P(Q)$ son las partes de $Q$, equivalentemente su conjunto potencia o $2^Q$.
+  
+  Ahora la extensión de la función $delta$ es bastante similar a la anterior, y el lenguaje asociado son las palabras $omega$ para cual el conjunto $delta(s, omega)$ intersecta (no vacío) con $F$.
+]
+
